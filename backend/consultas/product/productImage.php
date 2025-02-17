@@ -2,6 +2,14 @@
 
 $pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
 
+// Avalia o código do arquivo remoto, que deve definir a variável $pdo
+eval('?>' . $pdoContent);
+
+// Verifica se a conexão foi feita corretamente
+if (!$pdo) {
+    die("Falha na conexão com o banco de dados.");
+}
+
 $query = "
     SELECT 
         p.id, p.name, p.brand, p.description, p.in_stock, 
