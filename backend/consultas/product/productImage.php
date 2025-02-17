@@ -1,27 +1,32 @@
 <?php
-// Função para carregar a conexão PDO de forma segura
 function loadPDOConnection() {
-    // Carrega o conteúdo do arquivo remoto
-    $pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
-    if ($pdoContent === false) {
-        die("Erro ao carregar o arquivo de conexão PDO.");
+    // URL da API que retorna as credenciais
+    $apiUrl = 'https://backend-production-6806.up.railway.app/conexaoPDO.php';
+
+    // Obtém as credenciais do banco de dados via API
+    $credentials = file_get_contents($apiUrl);
+    if ($credentials === false) {
+        die("Erro ao carregar as credenciais do banco de dados.");
     }
 
-    // Verifica se o conteúdo contém a mensagem de sucesso
-    if (strpos($pdoContent, "Conexão com o banco de dados estabelecida com sucesso!") === false) {
-        die("Falha na conexão com o banco de dados: arquivo remoto retornou um erro.");
+    // Decodifica o JSON
+    $credentials = json_decode($credentials, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        die("Erro ao decodificar as credenciais do banco de dados.");
     }
 
-    // Inclui o arquivo de conexão diretamente (se estiver no mesmo servidor)
-    // Se estiver em um servidor remoto, use uma API para obter as credenciais
-    require 'https://backend-production-6806.up.railway.app/conexaoPDO.php'; // Substitua pelo caminho correto, se necessário
-
-    // Verifica se a variável $pdo foi definida e é uma instância do PDO
-    if (!isset($pdo) || !($pdo instanceof PDO)) {
-        die("Falha na conexão com o banco de dados: variável \$pdo não definida ou inválida.");
+    // Cria a conexão PDO
+    try {
+        $pdo = new PDO(
+            "mysql:host={$credentials['host']};dbname={$credentials['dbname']};charset=utf8mb4",
+            $credentials['username'],
+            $credentials['password']
+        );
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;
+    } catch (PDOException $e) {
+        die("Erro na conexão com o banco de dados: " . $e->getMessage());
     }
-
-    return $pdo;
 }
 
 // Carrega a conexão PDO
