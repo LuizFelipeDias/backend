@@ -1,10 +1,6 @@
 <?php
 
-require_once '../../../conexao/conexaoPDO.php';
-
-header("Access-Control-Allow-Origin: http://127.0.0.1:5173");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+$pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
 
 $query = "
     SELECT 
