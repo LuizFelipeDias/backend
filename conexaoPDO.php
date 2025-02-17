@@ -2,7 +2,7 @@
 $host = '207.126.166.43'; // Endereço IP do servidor do banco de dados
 $dbname = 'ecommerce';    // Nome do banco de dados
 $username = 'root';       // Usuário do banco de dados
-$password = '';  // Senha do banco de dados (substitua pela senha correta)
+$password = 'L&fda220320002';  // Senha do banco de dados (substitua pela senha correta)
 
 try {
     // Conexão com o banco de dados usando PDO
