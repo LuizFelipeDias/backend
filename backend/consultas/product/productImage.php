@@ -1,9 +1,25 @@
 <?php
 
-$pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
+// Função para carregar a conexão PDO de forma segura
+function loadPDOConnection() {
+    $pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
+    if ($pdoContent === false) {
+        die("Erro ao carregar o arquivo de conexão PDO.");
+    }
 
-// Avalia o código do arquivo remoto, que deve definir a variável $pdo
-eval('?>' . $pdoContent);
+    // Inclui o código de conexão diretamente
+    eval('?>' . $pdoContent);
+
+    // Verifica se a variável $pdo foi definida e é uma instância do PDO
+    if (!isset($pdo) || !($pdo instanceof PDO)) {
+        die("Falha na conexão com o banco de dados: variável \$pdo não definida ou inválida.");
+    }
+
+    return $pdo;
+}
+
+// Carrega a conexão PDO
+$pdo = loadPDOConnection();
 
 // Verifica se a conexão foi feita corretamente
 if (!$pdo) {
