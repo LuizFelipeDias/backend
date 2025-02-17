@@ -1,14 +1,20 @@
 <?php
-
 // Função para carregar a conexão PDO de forma segura
 function loadPDOConnection() {
+    // Carrega o conteúdo do arquivo remoto
     $pdoContent = file_get_contents('https://backend-production-6806.up.railway.app/conexaoPDO.php');
     if ($pdoContent === false) {
         die("Erro ao carregar o arquivo de conexão PDO.");
     }
 
-    // Inclui o código de conexão diretamente
-    eval('?>' . $pdoContent);
+    // Verifica se o conteúdo contém a mensagem de sucesso
+    if (strpos($pdoContent, "Conexão com o banco de dados estabelecida com sucesso!") === false) {
+        die("Falha na conexão com o banco de dados: arquivo remoto retornou um erro.");
+    }
+
+    // Inclui o arquivo de conexão diretamente (se estiver no mesmo servidor)
+    // Se estiver em um servidor remoto, use uma API para obter as credenciais
+    require 'https://backend-production-6806.up.railway.app/conexaoPDO.php'; // Substitua pelo caminho correto, se necessário
 
     // Verifica se a variável $pdo foi definida e é uma instância do PDO
     if (!isset($pdo) || !($pdo instanceof PDO)) {
