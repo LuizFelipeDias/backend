@@ -1,4 +1,4 @@
-###E-COMMERCE BACKEND
+#E-COMMERCE BACKEND
 
 ### 1.HOW I DID IT
 - I used MySQL and searched the places where I could deploy safely. Firstly, to do local, I used XAMMP, after that, the API was created and made possible to connect both sides, front and back.
