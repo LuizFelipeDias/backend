@@ -12,4 +12,4 @@
 ![Railway](https://img.shields.io/badge/-Railway-333333?style=flat&logo=railway)
 ![PHP](https://img.shields.io/badge/-PHP-333333?style=flat&logo=PHP)
 ![Node.js](https://img.shields.io/badge/-Node.js-333333?style=flat&logo=Node.js)
-![Sql](https://img.shields.io/badge/-Sql-333333?style=flat&logo=Sql)
+![sql](https://img.shields.io/badge/-sql-333333?style=flat&logo=sql)
