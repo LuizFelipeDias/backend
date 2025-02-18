@@ -1,9 +1,9 @@
 ###E-COMMERCE BACKEND
 
 ### 1.HOW I DID IT
-- I used MySQL and searched the places where I could deploy in a safe way. Firstly to do local I used XAMMP, after that, the api was created and made possible connnect both sides, front an back.
-- After that I downloaded the Workbench, worked prety weel. The serves was interconnected.
-- To dploy in Web, the KAMATERA and Railway was my choices. Easy to urderstand and cheap. Both of them are secure places to deposity the database.
+- I used MySQL and searched the places where I could deploy safely. Firstly, to do local, I used XAMMP, after that, the API was created and made possible to connect both sides, front and back.
+- After that, I downloaded the Workbench, which worked pretty well. The serves were interconnected.
+- To deploy in Web, the KAMATERA and Railway were my choices. Easy to understand and cheap. Both of them are secure places to deposit the database.
 
 ## 2. WHAT I USED
 
